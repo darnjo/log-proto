@@ -1,0 +1,15 @@
+{
+  "name": "log-proto",
+  "version": "1.0.0",
+  "description": "Prototype Log API",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "josh@reso.org",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.16.4",
+    "pg-promise": "^8.6.0"
+  }
+}
