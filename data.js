@@ -1,6 +1,6 @@
 const RESOURCE_TYPES = {
   OFFICE: "Office",
-  MEMBER: "Media",
+  MEMBER: "Member",
   PROPERTY: "Property",
   MEDIA: "Media",
   OPEN_HOUSE: "OpenHouse",
