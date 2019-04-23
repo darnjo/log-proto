@@ -8,145 +8,193 @@ const RESOURCE_TYPES = {
 
 //see TODO in app.js
 
-const Offices = {
-  1: {
-    name: "Office 1", 
+const Offices = [
+  {
+    OfficeKey: 1,
+    OfficeName: "Office 1"
   },
-  2: {
-    name: "Office 2", 
+  {
+    OfficeKey: 2,
+    OfficeName: "Office 2"
   },
-  3: {
-    name: "Office 3", 
+  {
+    OfficeKey: 3,
+    OfficeName: "Office 3"
   },
-  4: {
-    name: "Office 4", 
+  {
+    OfficeKey: 4,
+    OfficeName: "Office 4"
   },
-  5: {
-    name: "Office 5", 
+  {
+    OfficeKey: 5,
+    OfficeName: "Office 5"
   },
-  6: {
-    name: "Office 6", 
+  {
+    OfficeKey: 6,
+    OfficeName: "Office 6"
   },
-  7: {
-    name: "Office 7", 
-  },
-};
+  {
+    OfficeKey: 7,
+    OfficeName: "Office 7"
+  }
+];
 
-const Members = {
-  1: {
-    name: "Member 1", 
-    office: Offices[7],
+const Members = [
+  {
+    MemberKey: 1,
+    MemberFullName: "Member 1",
+    OfficeKey: Offices[6].OfficeKey
   },
-  2: {
-    name: "Member 2", 
-    office: Offices[6],
+  {
+    MemberKey: 2,
+    MemberFullName: "Member 2",
+    OfficeKey: Offices[5].OfficeKey
   },
-  3: {
-    name: "Member 3", 
-    office: Offices[5],
+  {
+    MemberKey: 3,
+    MemberFullName: "Member 3",
+    OfficeKey: Offices[4].OfficeKey
   },
-  4: {
-    name: "Member 4", 
-    office: Offices[4],
+  {
+    MemberKey: 4,
+    MemberFullName: "Member 4",
+    OfficeKey: Offices[3].OfficeKey
   },
-  5: {
-    name: "Member 5", 
-    office: Offices[3],
+  {
+    MemberKey: 5,
+    MemberFullName: "Member 5",
+    OfficeKey: Offices[2].OfficeKey
 
   },
-  6: {
-    name: "Member 6", 
-    office: Offices[2],
+  {
+    MemberKey: 6,
+    MemberFullName: "Member 6",
+    OfficeKey: Offices[1].OfficeKey
   },
-  7: {
-    name: "Member 7", 
-    office: Offices[1],
-  },
-};
+  {
+    MemberKey: 7,
+    MemberFullName: "Member 7",
+    OfficeKey: Offices[0].OfficeKey
+  }
+];
 
-const Media = {
-  1: {
-    name: "Media 1", 
-    url: "https://yolo.com/1.png", 
+const Media = [
+  {
+    MediaKey: 1,
+    ShortDescription: "Media 1",
+    MediaURL: "https://yolo.com/1.png",
+    ResoureName: 'Property',
+    ResourceRecordKey: Listings[0].ListingKey
   },
-  2: {
-    name: "Media 2", 
-    url: "https://yolo.com/2.png", 
+  {
+    MediaKey: 2,
+    ShortDescription: "Media 2",
+    MediaURL: "https://yolo.com/2.png",
+    ResoureName: 'Property',
+    ResourceRecordKey: Listings[0].ListingKey
   },
-  3: {
-    name: "Media 3", 
-    url: "https://yolo.com/3.png", 
+  {
+    MediaKey: 3,
+    ShortDescription: "Media 3",
+    MediaURL: "https://yolo.com/3.png",
+    ResoureName: 'Property',
+    ResourceRecordKey: Listings[2].ListingKey
   },
-  4: {
-    name: "Media 4", 
-    url: "https://yolo.com/4.png", 
+  {
+    MediaKey: 4,
+    ShortDescription: "Media 4",
+    MediaURL: "https://yolo.com/4.png",
+    ResoureName: 'Property',
+    ResourceRecordKey: Listings[2].ListingKey
   },
-  5: {
-    name: "Media 5", 
-    url: "https://yolo.com/5.png", 
+  {
+    MediaKey: 5,
+    ShortDescription: "Media 5",
+    MediaURL: "https://yolo.com/5.png",
+    ResoureName: 'Property',
+    ResourceRecordKey: Listings[4].ListingKey
   },
-  6: {
-    name: "Media 6", 
-    url: "https://yolo.com/6.png", 
+  {
+    MediaKey: 6,
+    ShortDescription: "Media 6",
+    MediaURL: "https://yolo.com/6.png",
+    ResoureName: 'Property',
+    ResourceRecordKey: Listings[5].ListingKey
   },
-  7: {
-    name: "Media 7", 
-    url: "https://yolo.com/7.png", 
+  {
+    MediaKey: 7,
+    ShortDescription: "Media 7",
+    MediaURL: "https://yolo.com/7.png",
+    ResoureName: 'Property',
+    ResourceRecordKey: Listings[6].ListingKey
   },
-  8: {
-    name: "Media 8", 
-    url: "https://yolo.com/8.png", 
+  {
+    MediaKey: 8,
+    ShortDescription: "Media 8",
+    MediaURL: "https://yolo.com/8.png",
+    ResoureName: 'Property',
+    ResourceRecordKey: Listings[3].ListingKey
   },
-  9: {
-    name: "Media 9", 
-    url: "https://yolo.com/9.png", 
-  },
-};
+  {
+    MediaKey: 9,
+    ShortDescription: "Media 9",
+    MediaURL: "https://yolo.com/9.png",
+    ResoureName: 'Property',
+    ResourceRecordKey: Listings[1].ListingKey
+  }
+];
 
-const Listings = {
-  1: {
-    address: "1 Log Street",
-    price: 123,
-    members: [Members[3]],
-    media: [Media[1], Media[2]],
+const Listings = [
+  {
+    ListingKey: 1,
+    UnparsedAddress: "1 Log Street",
+    ListPrice: 123,
+    ListAgentKey: Members[3].MemberKey,
+    ListOfficeKey: Offices[0].OfficeKey
   },
-  2: {
-    address: "2 Log Street",
-    price: 234,
-    members: [Members[2]], 
-    media: [Media[9]],
+  {
+    ListingKey: 2,
+    UnparsedAddress: "2 Log Street",
+    ListPrice: 234,
+    ListAgentKey: Members[1].MemberKey,
+    ListOfficeKey: Offices[1].OfficeKey
   },
-  3: {
-    address: "3 Log Street",
-    price: 345,
-    members: [Members[1]], 
-    media: [Media[3], Media[4]],
+  {
+    ListingKey: 3,
+    UnparsedAddress: "3 Log Street",
+    ListPrice: 345,
+    ListAgentKey: Members[0].MemberKey,
+    ListOfficeKey: Offices[2].OfficeKey
   },
-  4: {
-    address: "4 Log Street",
-    price: 456,
-    members: [Members[3]],
-    media: [Media[8]],
+  {
+    ListingKey: 4,
+    UnparsedAddress: "4 Log Street",
+    ListPrice: 456,
+    ListAgentKey: Members[2].MemberKey,
+    ListOfficeKey: Offices[3].OfficeKey
   },
-  5: {
-    address: "5 Log Street",
-    price: 567,
-    members: [Members[5]], 
-    media: [Media[5]],
+  {
+    ListingKey: 5,
+    UnparsedAddress: "5 Log Street",
+    ListPrice: 567,
+    ListAgentKey: Members[4].MemberKey,
+    ListOfficeKey: Offices[4].OfficeKey
   },
-  6: {
-    address: "6 Log Street",
-    price: 678,
-    members: [Members[7]], 
-    media: [Media[6]],
+  {
+    ListingKey: 6,
+    UnparsedAddress: "6 Log Street",
+    ListPrice: 678,
+    ListAgentKey: Members[6].MemberKey,
+    ListOfficeKey: Offices[5].OfficeKey
   },
-  7: {
-    address: "7 Log Street",
-    price: 789,
-    members: [Members[6]], 
-    media: [Media[7]],
-  },
-};
+  {
+    ListingKey: 7,
+    UnparsedAddress: "7 Log Street",
+    ListPrice: 789,
+    ListAgentKey: Members[5].MemberKey,
+    ListOfficeKey: Offices[6].OfficeKey
+  }
+];
 
 const EVENTS = [
   {eventId: 1, resourceType: RESOURCE_TYPES.OFFICE, resourceId: 1},
