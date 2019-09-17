@@ -1,185 +1,264 @@
 const RESOURCE_TYPES = {
-  OFFICE: "Office",
-  MEMBER: "Media",
-  PROPERTY: "Property",
-  MEDIA: "Media",
-  OPEN_HOUSE: "OpenHouse",
+  OFFICE: { name: 'Office', keyField: 'OfficeKey' },
+  MEMBER: { name: 'Member', keyField: 'MemberKey' },
+  PROPERTY: { name: 'Property', keyField: 'ListingKey' },
+  MEDIA: { name: 'Media', keyField: 'MediaKey' },
+  OPEN_HOUSE: { name: 'OpenHouse', keyField: 'OpenHouseID' }
+};
+
+const RESOURCE_NAMES = {
+  Office: 'OFFICE',
+  Member: 'MEMBER',
+  Property: 'PROPERTY',
+  Media: 'MEDIA',
+  OpenHouse: 'OPEN_HOUSE'
 };
 
 //see TODO in app.js
 
-const Offices = {
-  1: {
-    name: "Office 1", 
+const OFFICE = [
+  {
+    OfficeKey: 1,
+    OfficeName: "Office 1"
   },
-  2: {
-    name: "Office 2", 
+  {
+    OfficeKey: 2,
+    OfficeName: "Office 2"
   },
-  3: {
-    name: "Office 3", 
+  {
+    OfficeKey: 3,
+    OfficeName: "Office 3"
   },
-  4: {
-    name: "Office 4", 
+  {
+    OfficeKey: 4,
+    OfficeName: "Office 4"
   },
-  5: {
-    name: "Office 5", 
+  {
+    OfficeKey: 5,
+    OfficeName: "Office 5"
   },
-  6: {
-    name: "Office 6", 
+  {
+    OfficeKey: 6,
+    OfficeName: "Office 6"
   },
-  7: {
-    name: "Office 7", 
-  },
-};
-
-const Members = {
-  1: {
-    name: "Member 1", 
-    office: Offices[7],
-  },
-  2: {
-    name: "Member 2", 
-    office: Offices[6],
-  },
-  3: {
-    name: "Member 3", 
-    office: Offices[5],
-  },
-  4: {
-    name: "Member 4", 
-    office: Offices[4],
-  },
-  5: {
-    name: "Member 5", 
-    office: Offices[3],
-
-  },
-  6: {
-    name: "Member 6", 
-    office: Offices[2],
-  },
-  7: {
-    name: "Member 7", 
-    office: Offices[1],
-  },
-};
-
-const Media = {
-  1: {
-    name: "Media 1", 
-    url: "https://yolo.com/1.png", 
-  },
-  2: {
-    name: "Media 2", 
-    url: "https://yolo.com/2.png", 
-  },
-  3: {
-    name: "Media 3", 
-    url: "https://yolo.com/3.png", 
-  },
-  4: {
-    name: "Media 4", 
-    url: "https://yolo.com/4.png", 
-  },
-  5: {
-    name: "Media 5", 
-    url: "https://yolo.com/5.png", 
-  },
-  6: {
-    name: "Media 6", 
-    url: "https://yolo.com/6.png", 
-  },
-  7: {
-    name: "Media 7", 
-    url: "https://yolo.com/7.png", 
-  },
-  8: {
-    name: "Media 8", 
-    url: "https://yolo.com/8.png", 
-  },
-  9: {
-    name: "Media 9", 
-    url: "https://yolo.com/9.png", 
-  },
-};
-
-const Listings = {
-  1: {
-    address: "1 Log Street",
-    price: 123,
-    members: [Members[3]],
-    media: [Media[1], Media[2]],
-  },
-  2: {
-    address: "2 Log Street",
-    price: 234,
-    members: [Members[2]], 
-    media: [Media[9]],
-  },
-  3: {
-    address: "3 Log Street",
-    price: 345,
-    members: [Members[1]], 
-    media: [Media[3], Media[4]],
-  },
-  4: {
-    address: "4 Log Street",
-    price: 456,
-    members: [Members[3]],
-    media: [Media[8]],
-  },
-  5: {
-    address: "5 Log Street",
-    price: 567,
-    members: [Members[5]], 
-    media: [Media[5]],
-  },
-  6: {
-    address: "6 Log Street",
-    price: 678,
-    members: [Members[7]], 
-    media: [Media[6]],
-  },
-  7: {
-    address: "7 Log Street",
-    price: 789,
-    members: [Members[6]], 
-    media: [Media[7]],
-  },
-};
-
-const EVENTS = [
-  {eventId: 1, resourceType: RESOURCE_TYPES.OFFICE, resourceId: 1},
-  {eventId: 2, resourceType: RESOURCE_TYPES.MEMBER, resourceId: 1},
-  {eventId: 3, resourceType: RESOURCE_TYPES.PROPERTY, resourceId: 1},
-  {eventId: 4, resourceType: RESOURCE_TYPES.MEDIA, resourceId: 1},
-  {eventId: 5, resourceType: RESOURCE_TYPES.MEDIA, resourceId: 2},
-  {eventId: 6, resourceType: RESOURCE_TYPES.MEDIA, resourceId: 3},
-  {eventId: 7, resourceType: RESOURCE_TYPES.MEDIA, resourceId: 4},
-  {eventId: 8, resourceType: RESOURCE_TYPES.MEDIA, resourceId: 5},
-  {eventId: 9, resourceType: RESOURCE_TYPES.MEDIA, resourceId: 6},
-  {eventId: 10, resourceType: RESOURCE_TYPES.MEMBER, resourceId: 2},
-  {eventId: 11, resourceType: RESOURCE_TYPES.MEMBER, resourceId: 1},
-  {eventId: 12, resourceType: RESOURCE_TYPES.OFFICE, resourceId: 2},
-  {eventId: 13, resourceType: RESOURCE_TYPES.PROPERTY, resourceId: 2},
-  {eventId: 14, resourceType: RESOURCE_TYPES.PROPERTY, resourceId: 3},
-  {eventId: 15, resourceType: RESOURCE_TYPES.MEDIA, resourceId: 7},
-  {eventId: 16, resourceType: RESOURCE_TYPES.MEDIA, resourceId: 8},
-  {eventId: 17, resourceType: RESOURCE_TYPES.MEDIA, resourceId: 9},
-  {eventId: 18, resourceType: RESOURCE_TYPES.MEDIA, resourceId: 3},
-  {eventId: 19, resourceType: RESOURCE_TYPES.OFFICE, resourceId: 4},
-  {eventId: 20, resourceType: RESOURCE_TYPES.OFFICE, resourceId: 5},
-  {eventId: 21, resourceType: RESOURCE_TYPES.OFFICE, resourceId: 6},
-  {eventId: 22, resourceType: RESOURCE_TYPES.MEMBER, resourceId: 1},
-  {eventId: 23, resourceType: RESOURCE_TYPES.MEMBER, resourceId: 2},
-  {eventId: 24, resourceType: RESOURCE_TYPES.MEMBER, resourceId: 3},
-  {eventId: 25, resourceType: RESOURCE_TYPES.PROPERTY, resourceId: 1},
-  {eventId: 26, resourceType: RESOURCE_TYPES.PROPERTY, resourceId: 2},
-  {eventId: 27, resourceType: RESOURCE_TYPES.MEDIA, resourceId: 2},
+  {
+    OfficeKey: 7,
+    OfficeName: "Office 7"
+  }
 ];
 
+const MEMBER = [
+  {
+    MemberKey: 1,
+    MemberFullName: "Member 1",
+    OfficeKey: OFFICE[6].OfficeKey
+  },
+  {
+    MemberKey: 2,
+    MemberFullName: "Member 2",
+    OfficeKey: OFFICE[5].OfficeKey
+  },
+  {
+    MemberKey: 3,
+    MemberFullName: "Member 3",
+    OfficeKey: OFFICE[4].OfficeKey
+  },
+  {
+    MemberKey: 4,
+    MemberFullName: "Member 4",
+    OfficeKey: OFFICE[3].OfficeKey
+  },
+  {
+    MemberKey: 5,
+    MemberFullName: "Member 5",
+    OfficeKey: OFFICE[2].OfficeKey
+
+  },
+  {
+    MemberKey: 6,
+    MemberFullName: "Member 6",
+    OfficeKey: OFFICE[1].OfficeKey
+  },
+  {
+    MemberKey: 7,
+    MemberFullName: "Member 7",
+    OfficeKey: OFFICE[0].OfficeKey
+  }
+];
+
+const PROPERTY = [
+  {
+    ListingKey: 1,
+    UnparsedAddress: "1 Log Street",
+    ListPrice: 123,
+    ListAgentKey: MEMBER[3].MemberKey,
+    ListOfficeKey: OFFICE[0].OfficeKey
+  },
+  {
+    ListingKey: 2,
+    UnparsedAddress: "2 Log Street",
+    ListPrice: 234,
+    ListAgentKey: MEMBER[1].MemberKey,
+    ListOfficeKey: OFFICE[1].OfficeKey
+  },
+  {
+    ListingKey: 3,
+    UnparsedAddress: "3 Log Street",
+    ListPrice: 345,
+    ListAgentKey: MEMBER[0].MemberKey,
+    ListOfficeKey: OFFICE[2].OfficeKey
+  },
+  {
+    ListingKey: 4,
+    UnparsedAddress: "4 Log Street",
+    ListPrice: 456,
+    ListAgentKey: MEMBER[2].MemberKey,
+    ListOfficeKey: OFFICE[3].OfficeKey
+  },
+  {
+    ListingKey: 5,
+    UnparsedAddress: "5 Log Street",
+    ListPrice: 567,
+    ListAgentKey: MEMBER[4].MemberKey,
+    ListOfficeKey: OFFICE[4].OfficeKey
+  },
+  {
+    ListingKey: 6,
+    UnparsedAddress: "6 Log Street",
+    ListPrice: 678,
+    ListAgentKey: MEMBER[6].MemberKey,
+    ListOfficeKey: OFFICE[5].OfficeKey
+  },
+  {
+    ListingKey: 7,
+    UnparsedAddress: "7 Log Street",
+    ListPrice: 789,
+    ListAgentKey: MEMBER[5].MemberKey,
+    ListOfficeKey: OFFICE[6].OfficeKey
+  }
+];
+
+const MEDIA = [
+  {
+    MediaKey: 1,
+    ShortDescription: "Media 1",
+    MediaURL: "https://yolo.com/1.png",
+    ResourceName: 'Property',
+    ResourceRecordKey: PROPERTY[0].ListingKey
+  },
+  {
+    MediaKey: 2,
+    ShortDescription: "Media 2",
+    MediaURL: "https://yolo.com/2.png",
+    ResourceName: 'Property',
+    ResourceRecordKey: PROPERTY[0].ListingKey
+  },
+  {
+    MediaKey: 3,
+    ShortDescription: "Media 3",
+    MediaURL: "https://yolo.com/3.png",
+    ResourceName: 'Property',
+    ResourceRecordKey: PROPERTY[2].ListingKey
+  },
+  {
+    MediaKey: 4,
+    ShortDescription: "Media 4",
+    MediaURL: "https://yolo.com/4.png",
+    ResourceName: 'Property',
+    ResourceRecordKey: PROPERTY[2].ListingKey
+  },
+  {
+    MediaKey: 5,
+    ShortDescription: "Media 5",
+    MediaURL: "https://yolo.com/5.png",
+    ResourceName: 'Property',
+    ResourceRecordKey: PROPERTY[4].ListingKey
+  },
+  {
+    MediaKey: 6,
+    ShortDescription: "Media 6",
+    MediaURL: "https://yolo.com/6.png",
+    ResourceName: 'Property',
+    ResourceRecordKey: PROPERTY[5].ListingKey
+  },
+  {
+    MediaKey: 7,
+    ShortDescription: "Media 7",
+    MediaURL: "https://yolo.com/7.png",
+    ResourceName: 'Property',
+    ResourceRecordKey: PROPERTY[6].ListingKey
+  },
+  {
+    MediaKey: 8,
+    ShortDescription: "Media 8",
+    MediaURL: "https://yolo.com/8.png",
+    ResourceName: 'Property',
+    ResourceRecordKey: PROPERTY[3].ListingKey
+  },
+  {
+    MediaKey: 9,
+    ShortDescription: "Media 9",
+    MediaURL: "https://yolo.com/9.png",
+    ResourceName: 'Property',
+    ResourceRecordKey: PROPERTY[1].ListingKey
+  }
+];
+
+const RESOURCE_DATA = {
+  OFFICE,
+  MEMBER,
+  PROPERTY,
+  MEDIA
+}
+
+const eventOrder = [
+  { resource: 'OFFICE', item: 0 },
+  { resource: 'MEMBER', item: 0 },
+  { resource: 'PROPERTY', item: 0 },
+  { resource: 'MEDIA', item: 0 },
+  { resource: 'MEDIA', item: 1 },
+  { resource: 'MEDIA', item: 2 },
+  { resource: 'MEDIA', item: 3 },
+  { resource: 'MEDIA', item: 4 },
+  { resource: 'MEDIA', item: 5 },
+  { resource: 'MEMBER', item: 1 },
+  { resource: 'MEMBER', item: 0 },
+  { resource: 'OFFICE', item: 1 },
+  { resource: 'PROPERTY', item: 1 },
+  { resource: 'PROPERTY', item: 2 },
+  { resource: 'MEDIA', item: 6 },
+  { resource: 'MEDIA', item: 7 },
+  { resource: 'MEDIA', item: 8 },
+  { resource: 'MEDIA', item: 2 },
+  { resource: 'OFFICE', item: 3 },
+  { resource: 'OFFICE', item: 4 },
+  { resource: 'OFFICE', item: 5 },
+  { resource: 'MEMBER', item: 0 },
+  { resource: 'MEMBER', item: 1 },
+  { resource: 'MEMBER', item: 2 },
+  { resource: 'PROPERTY', item: 0 },
+  { resource: 'PROPERTY', item: 1 },
+  { resource: 'MEDIA', item: 1 }
+];
+
+const EVENTS = [];
+let eventCounter = 1;
+
+eventOrder.forEach(e => {
+  const ResourceName = RESOURCE_TYPES[e.resource].name;
+  const keyField = RESOURCE_TYPES[e.resource].keyField;
+
+  EVENTS.push({
+    EventSequenceNumeric: eventCounter++,
+    ResourceName,
+    ResourceRecordKeyNumeric: RESOURCE_DATA[e.resource][e.item][keyField],
+    ResourceRecordURL: `http://localhost:3000/${ResourceName}/${RESOURCE_DATA[e.resource][e.item][keyField]}`
+  })
+});
+
 module.exports = {
-  RESOURCE_DATA : {Offices, Members, Listings, Media},
+  RESOURCE_DATA,
   EVENTS,
   RESOURCE_TYPES,
+  RESOURCE_NAMES
 }
