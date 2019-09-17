@@ -4,9 +4,11 @@
   "description": "Prototype Log API",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
   },
-  "author": "josh@reso.org",
+  "author": "josh@kurotek.com",
+  "contributors": ["Eric Finlay"],
   "license": "MIT",
   "dependencies": {
     "express": "^4.16.4",
