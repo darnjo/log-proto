@@ -4,7 +4,7 @@ const express = require('express');
 const app = express();
 const port = 3000;
 
-const {EVENTS, RESOURCE_DATA, RESOURCE_TYPES, RESOURCE_NAMES} = require('./data');
+const {dataInit, getEvent, getEvents} = require('./data');
 
 //TODO:
 //  * add relationships between objects
@@ -21,7 +21,7 @@ app.get('/favicon.ico', (req, res) => {
 });
 
 // events endpoint
-app.get('/Events', (req, res) => {
+app.get('/events', (req, res) => {
   let {EventSequenceNumeric = 0} = req.query;
   let data = EVENTS.slice(EventSequenceNumeric, EVENTS.length);
 
@@ -81,4 +81,8 @@ const getData = (resourceType) => {
 };
 
 // start app
-app.listen(port, () => console.log(`Log Prototype listening on ${port}!`));
+app.listen(port, () => {
+    dataInit();
+    console.log(`Log Prototype listening on ${port}!`);
+  }
+);

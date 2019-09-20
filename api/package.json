@@ -8,10 +8,13 @@
     "start": "node app.js"
   },
   "author": "josh@kurotek.com",
-  "contributors": ["Eric Finlay"],
+  "contributors": [
+    "Eric Finlay"
+  ],
   "license": "MIT",
   "dependencies": {
     "express": "^4.16.4",
+    "faker": "^4.1.0",
     "pg-promise": "^8.6.0"
   }
 }
