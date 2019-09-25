@@ -46,11 +46,22 @@ Event generation not only constructs the event log, but also creates related res
 
 See `app.js` for the endpoints that are exposed. At the time of writing, the current set is:
 
-* `/events` - gets all events that have been generated. The response can be quite large.
+* `GET /events` - gets all events that have been generated. The response can be quite large.
 
-* `/events/gte/:entityEventSequence` - retrieves all events greater than or equal to `:entityEventSequence`. For instance, if the current log entry is 49 and a new event has been created, the consumer would request `http://localhost:3000/events/gte/50` in order to retrieve events later than most recent log entry.
+* `GET /events/gte/:entityEventSequence` - retrieves all events greater than or equal to `:entityEventSequence`. For instance, if the current log entry is 49 and a new event has been created, the consumer would request `http://localhost:3000/events/gte/50` in order to retrieve events later than most recent log entry.
 
-* `/:resource/:id` - fetches data for a given resourceName and resourceRecordKey (id). 
+* `GET /genEvents/:numEvents - generates `numEvents` more items in the log. Displays a counter with ETA on the server upon completion.curl -i  http://localhost:3000/genEvents/10000
+HTTP/1.1 200 OK
+X-Powered-By: Express
+Content-Type: text/plain; charset=utf-8
+Content-Length: 2
+ETag: W/"2-nOO9QiTIwXgNtWtBJezz8kv3SLc"
+Date: Wed, 25 Sep 2019 11:54:21 GMT
+Connection: keep-alive
+
+
+
+* `GET /:resource/:id` - fetches data for a given resourceName and resourceRecordKey (id). 
 
 For example, going to the following Url: `http://localhost:3000/Property/1810338110164523` results in a response of:
 
