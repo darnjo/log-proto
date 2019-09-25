@@ -1,6 +1,6 @@
 # There are two ways to run the API Server...
 
-# Local Node
+# Option 1: Local Node
 
 ## Ensure that npm and yarn are installed
 
@@ -68,13 +68,11 @@ Note that each of the keys in the response should also be reachable from their r
 
 Note that your particular data will be different as data are randomly generated. 
 
-
-# Coming Soon
+## Coming Soon
 * Serialization and resuming from a file
 * Update API with Schema Validation
 
-
-# Docker
+# Option 2: Docker
 
 You may also run the app inside of a docker container. At the time of writing, the progress bar doesn't output properly inside of a docker container, but the event generation links for each resource are valid and the API works correctly. This is suitable for a deployment scenario more than local development at the present time.
 
@@ -108,7 +106,7 @@ You may also run the app inside of a docker container. At the time of writing, t
   Subsequent URLs assume port 3000, so adjust accordingly.
 
 ## In a new terminal, make a request to the mock events API
-    curl -i localhost:3000/events
+    curl localhost:3000/events
 
 This should return something similar to the following:
 
