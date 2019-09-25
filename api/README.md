@@ -5,7 +5,7 @@
 ## Ensure that npm and yarn are installed
 
 * npm - https://www.npmjs.com/get-npm
-* yarn - https://www.npmjs.com/get-npm
+* yarn - https://yarnpkg.com/lang/en/docs/install/
 
 ## Install packages
 The first time you run the app, you'll have to install packages. The application uses `yarn`, so you can use the `yarn install` command. You should do this whenever the `package.json` file changes.
