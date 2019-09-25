@@ -15,10 +15,12 @@ After packages have been installed, type:
 
 ```node app.js```
 
-to start the server. 
+in the root of the `/api` directory to start the server. 
 
 ## Event Generation
-There's an event generation process which start upon initialization of the server. During this process, `DEFAULT_POOL_SIZE` events are generated (see `/data.js`, current default is 10^5 events per resource). There is a progress meter that shows how far along one is in the generation process with an ETA. Once events are generated, a sample resource data point is chosen from each resource and displayed so the generated data may be viewed. 
+There's an event generation process which starts upon initialization of the server. During this process, `DEFAULT_POOL_SIZE` events are generated (see `/data.js`, current default is 10^5 events per resource). 
+
+There is a progress meter that shows how far along one is in the generation process with an ETA. Once events are generated, a sample resource data point is chosen from each resource and displayed so the generated data may be viewed. 
 
 Output will be similar to the following:
 
@@ -38,14 +40,16 @@ Sample data:
 Log Prototype listening on 3000!
 ```
 
-Event generation not only constructs the event log, but also creates resources with randomized data that can be accessed from the URL for each data point.
+Event generation not only constructs the event log, but also creates related resources with randomized data that can be accessed from the URL for each data point.
 
 ## Other Endpoints
 
 See `app.js` for the endpoints that are exposed. At the time of writing, the current set is:
 
 * `/events` - gets all events that have been generated. The response can be quite large.
+
 * `/events/gte/:entityEventSequence` - retrieves all events greater than or equal to `:entityEventSequence`. For instance, if the current log entry is 49 and a new event has been created, the consumer would request `http://localhost:3000/events/gte/50` in order to retrieve events later than most recent log entry.
+
 * `/:resource/:id` - fetches data for a given resourceName and resourceRecordKey (id). 
 
 For example, going to the following Url: `http://localhost:3000/Property/1810338110164523` results in a response of:
@@ -66,9 +70,11 @@ Note that each of the keys in the response should also be reachable from their r
 {"officeKey":931235656736843,"officeName":"Volkman Inc"}
 ```
 
-Note that your particular data will be different as data are randomly generated. 
+It's worth mentioning that your particular data will be different as data are randomly generated. 
+
 
 ## Coming Soon
+* Random append events API endpoint
 * Serialization and resuming from a file
 * Update API with Schema Validation
 
