@@ -58,12 +58,12 @@ Note that each of the keys in the response should also be reachable from their r
 
 `http://localhost:3000/Member/5869937168380625` returns resource data for `listAgentKey: 5869937168380625` through `Member`: 
 ```
-     {"memberKey":5869937168380625,"memberFirstName":"Casper","memberLastName":"Purdy","officeKey":7488317500604925}
+{"memberKey":5869937168380625,"memberFirstName":"Casper","memberLastName":"Purdy","officeKey":7488317500604925}
 ```
 
 `http://localhost:3000/Office/931235656736843` returns resource data for `listOfficeKey: 931235656736843` through `Office`:
 ```
-     {"officeKey":931235656736843,"officeName":"Volkman Inc"}
+{"officeKey":931235656736843,"officeName":"Volkman Inc"}
 ```
 
 Note that your particular data will be different as data are randomly generated. 
