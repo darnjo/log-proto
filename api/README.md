@@ -85,7 +85,7 @@ It's worth mentioning that your particular data will be different as data are ra
 
 
 ## Coming Soon
-* Random append events API endpoint
+* ~~Random append events API endpoint~~ Added 2019/09/25
 * Serialization and resuming from a file
 * Update API with Schema Validation
 
