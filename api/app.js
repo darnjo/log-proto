@@ -15,13 +15,11 @@ app.get('/favicon.ico', (req, res) => {
 });
 
 // events endpoint
-app.get('/events', (req, res) => {
-  res.json(getEvents());
-});
+app.get('/events', (req, res) => res.json(getEvents()));
 
-app.get('/:resource/:id', (req, res) => {
-  res.json(getResourceData(req.params.resource, req.params.id));
-});
+app.get('/events/gte/:entityEventSequence', (req, res) => res.json(getEvents(req.params.entityEventSequence)));
+
+app.get('/:resource/:id', (req, res) => res.json(getResourceData(req.params.resource, req.params.id)));
 
 // start app
 app.listen(port, () => {
