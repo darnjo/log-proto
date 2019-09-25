@@ -1,16 +1,16 @@
 /* Data Generation Service */
 
+const faker = require('faker');
+const _cliProgress = require('cli-progress');
+
 const DEBUG = false;
 
-const DEFAULT_POOL_SIZE = 10**3;
+const DEFAULT_POOL_SIZE = 10**5;
 const HOST = "http://localhost:3000";
 const createRecordUrl = (resourceName, resourceKey) => `${HOST}/${resourceName}/${resourceKey}`;
 const getRandomInt = (size=Number.MAX_SAFE_INTEGER) => Math.floor(Math.random() * Math.floor(size));
 const getTimestamp = () => new Date().toISOString();
 
-const faker = require('faker');
-const _cliProgress = require('cli-progress');
-const _generatorProgressBar = new _cliProgress.SingleBar({}, _cliProgress.Presets.shades_classic);
 
 const LOG = msg => {if (DEBUG) console.log(`[${getTimestamp()}]: ${msg}`);};
 
@@ -66,12 +66,12 @@ const RAND = {
     };
   },
   genEvents (numEvents=DEFAULT_POOL_SIZE) {
+    const _generatorProgressBar = new _cliProgress.SingleBar({}, _cliProgress.Presets.shades_classic);
+    
     let data, eventData, total = 0, key, totalEvents = numEvents * Object.keys(METADATA).length;
-
     
     console.log(`\nGenerating ${totalEvents} Events!`);
     _generatorProgressBar.start(totalEvents, 0, {speed: 1000});
-
 
     Object.keys(METADATA).forEach(keyName => {
       let {name, keyField, generator} = METADATA[keyName];
@@ -96,7 +96,6 @@ const RAND = {
     }
   },
 };
-
 
 //holds the local generated cache of items in memory
 const _resourceCache = {
