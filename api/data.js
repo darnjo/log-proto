@@ -128,7 +128,6 @@ const initData = () => {
     let {name, keyField} = METADATA[key], {keyCache} = _resourceCache[name];
     console.log(`\t${name}: ${createRecordUrl(name, keyCache[0])}`);
   });
-  console.log();
 }
 
 const getEvent = (eventSequence) => _eventLog[eventSequence];
