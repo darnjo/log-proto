@@ -14,20 +14,13 @@ const getTimestamp = () => new Date().toISOString();
 
 const LOG = msg => {if (DEBUG) console.log(`[${getTimestamp()}]: ${msg}`);};
 
-const METADATA = {
-  OFFICE: {name: 'Office', keyField: 'officeKey', generator: 'RAND.genOffice'},
-  MEMBER: {name: 'Member', keyField: 'memberKey', generator: 'RAND.genMember'},
-  PROPERTY: {name: 'Property', keyField: 'listingKey', generator: 'RAND.genProperty'},
-  MEDIA: {name: "Media", keyField: 'mediaKey', generator: 'RAND.genMedia'},
-  OPEN_HOUSE: {name: 'OpenHouse', keyField: 'openHouseKey', generator: 'RAND.genOpenHouse'},
-};
-
 const RAND = {
   //TODO: use something like JSM, which adds faker to JSON Schema models.
   genOffice () { 
     return {
       officeKey: getRandomInt(),
       officeName: faker.company.companyName(),
+      modificationTimestamp: getTimestamp(),
     };
   },
   genMember () {
@@ -36,6 +29,7 @@ const RAND = {
       memberFirstName: faker.name.firstName(),
       memberLastName: faker.name.lastName(),
       officeKey: getRandomKey(METADATA.OFFICE),
+      modificationTimestamp: getTimestamp(),
     };
   },
   genProperty () {
@@ -45,6 +39,7 @@ const RAND = {
       listPrice: faker.commerce.price(),
       listAgentKey: getRandomKey(METADATA.MEMBER),
       listOfficeKey: getRandomKey(METADATA.OFFICE),
+      modificationTimestamp: getTimestamp(),
     };
   },
   genMedia () {
@@ -54,6 +49,7 @@ const RAND = {
       mediaUrl: faker.internet.url(),
       resourceName: METADATA.Property,
       resourceRecordKey: getRandomKey(METADATA.PROPERTY),
+      modificationTimestamp: getTimestamp(),
     };
   },
   genOpenHouse () {
@@ -63,6 +59,7 @@ const RAND = {
       openHouseDate: faker.date.future(),
       showingAgentKey: getRandomKey(METADATA.MEMBER),
       openHouseRemarks: faker.lorem.words(),
+      modificationTimestamp: getTimestamp(),
     };
   },
   genEvents (numEvents=DEFAULT_POOL_SIZE) {
@@ -77,7 +74,7 @@ const RAND = {
       let {name, keyField, generator} = METADATA[keyName];
 
       for (let i = 0; i < numEvents; i++) {
-        data = eval(generator)();
+        data = (generator)();
         key = data[keyField];
 
         setResourceData(keyName, key, data);
@@ -96,6 +93,15 @@ const RAND = {
     }
   },
 };
+
+const METADATA = {
+  OFFICE: {name: 'Office', keyField: 'officeKey', generator: RAND.genOffice},
+  MEMBER: {name: 'Member', keyField: 'memberKey', generator: RAND.genMember},
+  PROPERTY: {name: 'Property', keyField: 'listingKey', generator: RAND.genProperty},
+  MEDIA: {name: "Media", keyField: 'mediaKey', generator: RAND.genMedia},
+  OPEN_HOUSE: {name: 'OpenHouse', keyField: 'openHouseKey', generator: RAND.genOpenHouse},
+};
+
 
 //holds the local generated cache of items in memory
 const _resourceCache = {
@@ -141,7 +147,7 @@ const setResourceData = (keyName, resourceId, data={}) => {
       resource = _resourceCache[resourceName][resourceId];
 
   if (!resource) {
-    resource = eval(METADATA[keyName].generator)(); //ohhh so eval
+    resource = (METADATA[keyName].generator)();
     resource[METADATA.keyField] = resourceId;
     _resourceCache[resourceName].keyCache.push(resourceId);
   }

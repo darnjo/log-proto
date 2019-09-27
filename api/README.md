@@ -4,8 +4,8 @@
 
 ## Ensure that npm and yarn are installed
 
-* npm - https://www.npmjs.com/get-npm
-* yarn - https://yarnpkg.com/lang/en/docs/install/
+* npm - https://www.npmjs.com/get-npm (tested on 5.8.0)
+* yarn - https://yarnpkg.com/lang/en/docs/install/ (tested on 1.17.3)
 
 ## Install packages
 The first time you run the app, you'll have to install packages. The application uses `yarn`, so you can use the `yarn install` command. You should do this whenever the `package.json` file changes.
@@ -16,6 +16,9 @@ After packages have been installed, type:
 ```node app.js```
 
 in the root of the `/api` directory to start the server. 
+
+*NOTE*: for those generating large logs (100k+ events), you'll want to use the following command instead:
+```node --max-old-space-size=8192 app.js```
 
 ## Event Generation
 There's an event generation process which starts upon initialization of the server. During this process, `DEFAULT_POOL_SIZE` events are generated (see `/data.js`, current default is 10^5 events per resource). 
@@ -50,16 +53,19 @@ See `app.js` for the endpoints that are exposed. At the time of writing, the cur
 
 * `GET /events/gte/:entityEventSequence` - retrieves all events greater than or equal to `:entityEventSequence`. For instance, if the current log entry is 49 and a new event has been created, the consumer would request `http://localhost:3000/events/gte/50` in order to retrieve events later than most recent log entry.
 
-* `GET /genEvents/:numEvents - generates `numEvents` more items in the log. Displays a counter with ETA on the server upon completion.curl -i  http://localhost:3000/genEvents/10000
-HTTP/1.1 200 OK
-X-Powered-By: Express
-Content-Type: text/plain; charset=utf-8
-Content-Length: 2
-ETag: W/"2-nOO9QiTIwXgNtWtBJezz8kv3SLc"
-Date: Wed, 25 Sep 2019 11:54:21 GMT
-Connection: keep-alive
+* `POST /genEvents/:numEvents` - generates `numEvents` more items in the log. Displays a counter with ETA on the server upon completion.
 
-
+```
+  $ curl -X POST  http://localhost:3000/genEvents/10000
+    
+    HTTP/1.1 200 OK
+    X-Powered-By: Express
+    Content-Type: text/plain; charset=utf-8
+    Content-Length: 2
+    ETag: W/"2-nOO9QiTIwXgNtWtBJezz8kv3SLc"
+    Date: Wed, 25 Sep 2019 11:54:21 GMT
+    Connection: keep-alive
+```
 
 * `GET /:resource/:id` - fetches data for a given resourceName and resourceRecordKey (id). 
 
@@ -94,6 +100,7 @@ It's worth mentioning that your particular data will be different as data are ra
 You may also run the app inside of a docker container. At the time of writing, the progress bar doesn't output properly inside of a docker container, but the event generation links for each resource are valid and the API works correctly. This is suitable for a deployment scenario more than local development at the present time.
 
 ## [Ensure you're running Docker on your platform](https://docs.docker.com/install/).
+  Docker version 18.09.7, build 2d0083d or greater at the time of writing.
 ## Build the API container
 
   From the root of the node directory, run the following command:

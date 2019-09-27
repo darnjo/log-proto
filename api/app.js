@@ -21,7 +21,7 @@ app.get('/favicon.ico', (req, res) => res.send(''));
 // events endpoints
 app.get('/events', (req, res) => res.json(getEvents()));
 app.get('/events/gte/:entityEventSequence', (req, res) => res.json(getEvents(req.params.entityEventSequence)));
-app.get('/genEvents/:numEvents', (req, res) => {
+app.post('/genEvents/:numEvents', (req, res) => {
   const NUM_EVENTS_DEFAULT = 100;
   RAND.genEvents(req.params.numEvents || NUM_EVENTS_DEFAULT); 
   res.sendStatus(200);
