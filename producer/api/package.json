@@ -1,11 +1,12 @@
 {
-  "name": "log-proto",
-  "version": "1.0.0",
-  "description": "Prototype Log API",
+  "name": "log-proto-producer-api",
+  "version": "0.0.1",
+  "description": "Log Prototype Producer API",
   "main": "app.js",
+  "repository": "https://github.com/darnjo/log-proto",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node app.js"
+    "start": "node --max-old-space-size=8192 app.js"
   },
   "author": "josh@kurotek.com",
   "contributors": [

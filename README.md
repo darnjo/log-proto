@@ -2,7 +2,7 @@
 
 This application is structured in the following manner: 
 
-* `/api` - contains the API server and event generator.
-* `/client` - contains client code used to connect to the API.
+* `/producer` - contains the producer API server, database, and web interface.
+* `/consumer` - contains the consumer API server, database, and web interface.
 
 Please see the README in each respective directory for instructions on how to run the prototype.
