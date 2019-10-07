@@ -2,15 +2,12 @@
 
 const faker = require('faker');
 const _cliProgress = require('cli-progress');
-
 const DEBUG = false;
 
-const DEFAULT_POOL_SIZE = 10**5;
-const HOST = "http://localhost:3000";
-const createRecordUrl = (resourceName, resourceKey) => `${HOST}/${resourceName}/${resourceKey}`;
+const DEFAULT_POOL_SIZE = 10**4;
+const createRecordUrl = (resourceName, resourceKey) => `${this.appUrl}/${resourceName}/${resourceKey}`; 
 const getRandomInt = (size=Number.MAX_SAFE_INTEGER) => Math.floor(Math.random() * Math.floor(size));
 const getTimestamp = () => new Date().toISOString();
-
 
 const LOG = msg => {if (DEBUG) console.log(`[${getTimestamp()}]: ${msg}`);};
 
@@ -118,7 +115,14 @@ const _resourceCache = {
 const _eventLog = [];
 
 //generates an event log and related resource data
-const initData = () => {
+const initData = (appUrl) => {
+  if (this._isInited) {
+    console.log('Data service already init-ed...ignoring');
+    return;
+  }
+
+  this.appUrl = appUrl;
+
   console.log(`Event generation started. Pool size is ${DEFAULT_POOL_SIZE} events for each resource.`);
   
   RAND.genEvents(DEFAULT_POOL_SIZE);
@@ -128,6 +132,8 @@ const initData = () => {
     let {name, keyField} = METADATA[key], {keyCache} = _resourceCache[name];
     console.log(`\t${name}: ${createRecordUrl(name, keyCache[0])}`);
   });
+
+  this._isInited = true;
 }
 
 const getEvent = (eventSequence) => _eventLog[eventSequence];
