@@ -40,7 +40,7 @@ services:
       - .:/api
     depends_on:
       - mongo
-    command: node app.js
+    command: node --max-old-space-size=8192 app.js
 
 #  web:
 #    build:

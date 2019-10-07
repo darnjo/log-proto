@@ -15,5 +15,5 @@ This will launch the following containers:
 
 You will see the combined log output from each of these services when running them in `docker-compose`. 
 
-To stop the servers, press `<ctrl+c>` while they are running, or from another terminal type the command: `$docker-compose down`.
+To stop the servers, press `<ctrl+c>` while they are running, or from another terminal type the command: `$ docker-compose down`.
  
