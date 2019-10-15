@@ -15,48 +15,48 @@ const RAND = {
   //TODO: use something like JSM, which adds faker to JSON Schema models.
   genOffice () { 
     return {
-      officeKey: getRandomInt(),
-      officeName: faker.company.companyName(),
-      modificationTimestamp: getTimestamp(),
+      'OfficeKey': getRandomInt(),
+      'OfficeName': faker.company.companyName(),
+      'ModificationTimestamp': getTimestamp(),
     };
   },
   genMember () {
     return {
-      memberKey: getRandomInt(),
-      memberFirstName: faker.name.firstName(),
-      memberLastName: faker.name.lastName(),
-      officeKey: getRandomKey(METADATA.OFFICE),
-      modificationTimestamp: getTimestamp(),
+      'MemberKey': getRandomInt(),
+      'MemberFirstName': faker.name.firstName(),
+      'MemberLastName': faker.name.lastName(),
+      'OfficeKey': getRandomKey(METADATA.OFFICE),
+      'ModificationTimestamp': getTimestamp(),
     };
   },
   genProperty () {
     return {
-      listingKey: getRandomInt(),
-      unparsedAddress: `${faker.address.streetAddress()}, ${faker.address.streetName()}`,
-      listPrice: faker.commerce.price(),
-      listAgentKey: getRandomKey(METADATA.MEMBER),
-      listOfficeKey: getRandomKey(METADATA.OFFICE),
-      modificationTimestamp: getTimestamp(),
+      'ListingKey': getRandomInt(),
+      'UnparsedAddress': `${faker.address.streetAddress()}, ${faker.address.streetName()}`,
+      'ListPrice': faker.commerce.price(),
+      'ListAgentKey': getRandomKey(METADATA.MEMBER),
+      'ListOfficeKey': getRandomKey(METADATA.OFFICE),
+      'ModificationTimestamp': getTimestamp(),
     };
   },
   genMedia () {
     return {
-      mediaKey: getRandomInt(),
-      shortDescription: faker.lorem.words(),
-      mediaUrl: faker.internet.url(),
-      resourceName: METADATA.Property,
-      resourceRecordKey: getRandomKey(METADATA.PROPERTY),
-      modificationTimestamp: getTimestamp(),
+      'MediaKey': getRandomInt(),
+      'ShortDescription': faker.lorem.words(),
+      'MediaUrl': faker.internet.url(),
+      'ResourceName': METADATA.Property,
+      'ResourceRecordKey': getRandomKey(METADATA.PROPERTY),
+      'ModificationTimestamp': getTimestamp(),
     };
   },
   genOpenHouse () {
     return {
-      openHouseKey: getRandomInt(),
-      listingKey: getRandomKey(METADATA.PROPERTY),
-      openHouseDate: faker.date.future(),
-      showingAgentKey: getRandomKey(METADATA.MEMBER),
-      openHouseRemarks: faker.lorem.words(),
-      modificationTimestamp: getTimestamp(),
+      'OpenHouseKey': getRandomInt(),
+      'ListingKey': getRandomKey(METADATA.PROPERTY),
+      'OpenHouseDate': faker.date.future(),
+      'ShowingAgentKey': getRandomKey(METADATA.MEMBER),
+      'OpenHouseRemarks': faker.lorem.words(),
+      'ModificationTimestamp': getTimestamp(),
     };
   },
   genEvents (numEvents=DEFAULT_POOL_SIZE) {
@@ -92,11 +92,11 @@ const RAND = {
 };
 
 const METADATA = {
-  OFFICE: {name: 'Office', keyField: 'officeKey', generator: RAND.genOffice},
-  MEMBER: {name: 'Member', keyField: 'memberKey', generator: RAND.genMember},
-  PROPERTY: {name: 'Property', keyField: 'listingKey', generator: RAND.genProperty},
-  MEDIA: {name: "Media", keyField: 'mediaKey', generator: RAND.genMedia},
-  OPEN_HOUSE: {name: 'OpenHouse', keyField: 'openHouseKey', generator: RAND.genOpenHouse},
+  OFFICE: {name: 'Office', keyField: 'OfficeKey', generator: RAND.genOffice},
+  MEMBER: {name: 'Member', keyField: 'MemberKey', generator: RAND.genMember},
+  PROPERTY: {name: 'Property', keyField: 'ListingKey', generator: RAND.genProperty},
+  MEDIA: {name: "Media", keyField: 'MediaKey', generator: RAND.genMedia},
+  OPEN_HOUSE: {name: 'OpenHouse', keyField: 'OpenHouseKey', generator: RAND.genOpenHouse},
 };
 
 
@@ -137,11 +137,17 @@ const initData = (appUrl) => {
 }
 
 const getEvent = (eventSequence) => _eventLog[eventSequence];
-const getEvents = (fromEventSequence=0) => _eventLog.slice(fromEventSequence);
+const getEvents = (from=0, to=null) => to ? _eventLog.slice(from, to) : _eventLog.slice(from);
 
 const writeLogEvent = (resourceName, resourceKey) => {
-  let resourceRecordUrl = createRecordUrl(resourceName, resourceKey);
-  let data = {resourceName, resourceKey, resourceRecordUrl}
+  let resourceRecordUrl = createRecordUrl(resourceName, resourceKey),
+      data = {
+        'EntityEventSequence': _eventLog.length, 
+        'ResourceName': resourceName, 
+        'ResourceRecordKeyNumeric': resourceKey, 
+        'ResourceRecordUrl': resourceRecordUrl
+      };
+
   _eventLog.push(data);
   return data;
 };

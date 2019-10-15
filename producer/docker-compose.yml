@@ -22,7 +22,6 @@ services:
       - ALLOW_PLAINTEXT_LISTENER=yes
     depends_on:
       - zookeeper
-
   
   mongo:
     image: mongo
@@ -65,16 +64,16 @@ services:
       - mongo
     command: node --max-old-space-size=8192 app.js
 
-#  web:
-#    build:
-#      context: ./web
-#      dockerfile: Dockerfile
-#    ports:
-#      - 3000:3000
-#    depends_on: 
-#      - api
-#    environment:
-#      - NODE_ENV=development
+  web:
+    build:
+      context: ./web
+      dockerfile: Dockerfile
+    ports:
+      - 3000:3000
+    depends_on: 
+      - api
+    environment:
+      - NODE_ENV=development
 
 volumes:
   zookeeper_data:
